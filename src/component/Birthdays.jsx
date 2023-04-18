@@ -26,7 +26,7 @@ function iterate(data, flag) {
   );
 }
 
-// how old the person is
+//  Age
 function Old(personAge) {
   let year = new Date(personAge).getFullYear();
   let currentYear = new Date().getFullYear();
