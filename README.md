@@ -154,7 +154,8 @@
        return filter;
          }
 ### OUTPUT :
-       ![Screenshot (388)1](https://github.com/JANANI0210/react-birthday-calender/assets/86832944/c7f350d4-f97f-41d8-abaf-0f30090d5bb4)
+     
+![Screenshot (388)1](https://github.com/JANANI0210/react-birthday-calender/assets/86832944/2918ac3a-ea49-4df2-b8a3-96accbac79ff)
 
 
 ### RESULT :
