@@ -154,7 +154,8 @@
        return filter;
          }
 ### OUTPUT :
-        ![Screenshot (388)1](https://github.com/JANANI0210/react-birthday-calender/assets/86832944/df19f062-9ddc-470a-ba42-3e732773b9c4)
+       ![Screenshot (388)1](https://github.com/JANANI0210/react-birthday-calender/assets/86832944/c7f350d4-f97f-41d8-abaf-0f30090d5bb4)
+
 
 ### RESULT :
         Thus, to  create a birthday react application which displays birthdays on a particular day is created and implemented successfully.
