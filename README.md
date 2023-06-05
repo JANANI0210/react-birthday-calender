@@ -1,70 +1,160 @@
-# Getting Started with Create React App
+# REACT END PAPER TASK
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### AIM :
+         To create a birthday react application which displays birthdays on a particular day.
 
-## Available Scripts
+### ALGORITHM :
+        Step 1 : Start the program.
+        Step 2 : Install the required packages and create a react application
+        Step 3 : Create a folder routes and include the necessary components for all three pages.
+        Step 4 : Import the components required in the app.js page.
+        Step 5 : To run the application type npm start in the terminal.
+        Step 6 : Open the browser and enter the url as localhost:3500 
+        Step 7 : Stop the program.
+        
+ ### PROGRAM :
+ 
+      app.js
+           import "./App.css";
+           import Calendar from "./component/Calendar";
 
-In the project directory, you can run:
+           function App() {
+           return (
+           <div className="App">
+           <Calendar></Calendar>
+           </div>
+           );
+           }
 
-### `npm start`
+          export default App;
+          
+      calender.jsx
+           import React from "react";
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+           export default function Birthdays({ info, upcoming }) {
+           return <ul>{iterate(info, upcoming)}</ul>;
+           }
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+           function iterate(data, flag) {
+           if (!data) return;
+           const bgColor = flag ? { backgroundColor: "#ffe66d" } : {};
+           return (
+           <>
+          {data.map((person, index) => {
+          return (
+          <li key={index}>
+          <div className="flex" style={bgColor}>
+           <img src={person.img} alt="img" />
+           <div className="title">
+           <h3 className="name">{person.name}</h3>
+           <h5 className="age">{Old(person.birthday)} years</h5>
+           </div>
+           </div>
+           </li>
+           );
+           } )}
+          </>
+          );
+          }
 
-### `npm test`
+           //  Age
+          function Old(personAge) {
+          let year = new Date(personAge).getFullYear();
+          let currentYear = new Date().getFullYear();
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+          let age = currentYear - year;
+          return age;
+          }
 
-### `npm run build`
+     birthday.jsx
+          import React, { useState } from "react";
+          import "./Calendar.css";
+          import Birthdays from "./Birthdays";
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+           const Info = [
+           {
+           img: "https://nationaltoday.com/wp-content/uploads/2022/04/Albert-Einstein-Birthday.jpg",
+           name: "Albert Einstein",
+           birthday: "1887-0-14",
+            },
+           {
+           img: "https://www.india.com/wp-content/uploads/2020/06/sundar-pichai.jpg",
+           name: "Sundar Picha",
+           birthday: "1972-06-10",
+           },
+           {
+           img: "https://www.india.com/wp-content/uploads/2020/05/Facebook-clear-history-tool.jpg",
+           name: "Mark Zuckerberg",
+           birthday: "1984-04-17",
+           },
+           {
+           img: "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202109/narendra-modi-pti010721_1_1200x768.jpeg?size=1200:675",
+           name: "Narendra Modi",
+           birthday: "1950-09-17",
+           },
+           {
+           img: "https://st1.bollywoodlife.com/wp-content/uploads/2023/01/9-52.png",
+           name: "A R Rahman",
+           birthday: "1967-01-06",
+           },
+           {
+           img: "https://i.zoomtventertainment.com/story/thala_ajith_birthday.jpg",
+            name: "Ajith Kumar",
+           birthday: "1971-05-01",
+           },
+           ];
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+           export default function Calendar() {
+            const [date, setDate] = useState();
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+          console.log(" Date", date);
+          return (
+          <main id="site-main">
+          <div className="calendar">
+          <h1 className="text-dark title">Pick a Date</h1>
+          <input type="date" onChange={(e) => setDate(e.target.value)}></input>
+          <h2>Selected Date: {date}</h2>
+          {/* <h2 className="today text-dark">Display</h2> */}
+          {/* <Birthdays info={Display(Info)}></Birthdays> */}
+          <h2 className="today text-dark">Today</h2>
+          <Birthdays info={Today(Info)}></Birthdays>
+          <h2 className="upcoming text-dark">Upcoming</h2>
+         <Birthdays info={Upcoming(Info, 4)} upcoming={true}></Birthdays>
+         </div>
+        </main>
+        );
+        }
 
-### `npm run eject`
+        function Today(person) {
+        let currentDay = new Date().getDate();
+        let currentMonth = new Date().getMonth();
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+        let filter = person.filter((data) => {
+        let day = new Date(data.birthday).getDate();
+        let month = new Date(data.birthday).getMonth();
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+        return currentDay === day && currentMonth === month;
+        });
+        return filter;
+        }
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+       // upcoming birthdays
+        function Upcoming(person, toMonth) {
+        let currentMonth = new Date().getMonth();
+        let currentDay = new Date().getDate();
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+         let filter = person.filter((data) => {
+         let month = new Date(data.birthday).getMonth();
+         let day = new Date(data.birthday).getDate();
 
-## Learn More
+         if (currentDay === day) return;
+         return month >= currentMonth && month <= currentMonth + toMonth;
+        });
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+       return filter;
+         }
+### OUTPUT :
+        ![Screenshot (388)1](https://github.com/JANANI0210/react-birthday-calender/assets/86832944/df19f062-9ddc-470a-ba42-3e732773b9c4)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### RESULT :
+        Thus, to  create a birthday react application which displays birthdays on a particular day is created and implemented successfully.
